@@ -12,26 +12,29 @@ function characters() {
     while (!specialChar && !capital && !lower && !number) {
         alert("You must select at least one character type.");
         return characters();
-    }
-}
+    };
+    writePassword(specialChar, capital, lower, number);
+};
+
+characters();
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
-function writePassword() {
+function writePassword(specialChar, capital, lower, number) {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
+
+    var allowed = {};
+    if (specialChar) password += rando(allowed.specialChar = "!@#$%^&*");
+    if (capital) password += rando(allowed.capital = "QWERTYUIOPASDFGHJKLZXCVBNM");
+    if (lower) password += rando(allowed.lower = "qwertyuiopasdfghjklzxcvbnm");
+    if (number) password += rando(allowed.number = "1234567890");
 
     passwordText.value = password;
 
 }
-
-var allowed = {};
-if (specialChar) password += rando(allowed.specialChar = "!@#$%^&*");
-if (capital) password += rando(allowed.capital = "QWERTYUIOPASDFGHJKLZXCVBNM");
-if (lower) password += rando(allowed.lower = "qwertyuiopasdfghjklzxcvbnm");
-if (number) password += rando(allowed.number = "1234567890");
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
